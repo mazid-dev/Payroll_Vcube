@@ -1,6 +1,6 @@
 const admins = [
   { username: "Md Mazid Hossain", password: "mazid" },
-  { username: "rakib", password: "rakib" },
+  { username: "Adnan", password: "adnan" },
   { username: "jamil", password: "jamil" },
   { username: "fahim", password: "fahim" },
   { username: "riyad", password: "riyad" }
