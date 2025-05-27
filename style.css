@@ -1,0 +1,130 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f4f6fa;
+  color: #1d1f2f;
+}
+
+.login-body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #4f46e5, #3b82f6);
+}
+
+.login-container {
+  background: #fff;
+  padding: 30px 40px;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.login-container h2 {
+  margin-bottom: 20px;
+  color: #1e3a8a;
+}
+
+.login-box input {
+  display: block;
+  width: 250px;
+  padding: 12px;
+  margin: 10px auto;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+}
+
+.login-box button {
+  padding: 12px 25px;
+  background-color: #2563eb;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.login-box button:hover {
+  background-color: #1e40af;
+}
+
+/* Admin Panel */
+.admin-header {
+  background-color: #1e3a8a;
+  color: #fff;
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.admin-header h2 {
+  margin: 0;
+}
+
+nav button {
+  margin: 5px;
+  padding: 10px 15px;
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+nav button:hover {
+  background-color: #2563eb;
+}
+
+main {
+  padding: 20px;
+}
+
+.admin-section {
+  margin-top: 20px;
+}
+
+.admin-section input {
+  display: block;
+  margin: 10px 0;
+  padding: 10px;
+  width: 300px;
+  max-width: 100%;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.admin-section button {
+  background-color: #2563eb;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.admin-section button:hover {
+  background-color: #1e40af;
+}
+
+.hidden {
+  display: none;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+table th,
+table td {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: left;
+}
+
+table th {
+  background-color: #e0e7ff;
+}
