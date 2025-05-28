@@ -1,3 +1,5 @@
+const scriptURL = "https://script.google.com/macros/s/AKfycbz1pF9hEzsuNigV6iSXDV4KhDq8ZPMrGcWSy-qZ-wcuJtmgnHEvVFVKv4DZsU5RKlBnaA/exec"; // 🔁 Replace with your Apps Script URL
+
 const admins = [
   { username: "Md Mazid Hossain", password: "mazid" },
   { username: "Adnan", password: "adnan" },
@@ -6,7 +8,6 @@ const admins = [
   { username: "riyad", password: "riyad" }
 ];
 
-let employees = JSON.parse(localStorage.getItem("employees")) || [];
 let currentUser = null;
 let currentRole = null;
 
@@ -21,14 +22,20 @@ function handleLogin() {
     return;
   }
 
-  const isEmployee = employees.find(e => e.username === user && e.password === pass);
-  if (isEmployee) {
-    localStorage.setItem("loggedInUser", JSON.stringify({ user, role: "employee" }));
-    window.location.href = "employee.html";
-    return;
-  }
-
-  alert("❌ Invalid Credentials");
+  // Check Google Sheet for employee
+  fetch(`${scriptURL}?action=loginEmployee`, {
+    method: "POST",
+    body: JSON.stringify({ name: user, password: pass })
+  })
+  .then(res => res.json())
+  .then(data => {
+    if (data.success) {
+      localStorage.setItem("loggedInUser", JSON.stringify({ user, role: "employee" }));
+      window.location.href = "employee.html";
+    } else {
+      alert("❌ Invalid Credentials");
+    }
+  });
 }
 
 function checkLogin(role, redirect = "index.html") {
@@ -38,8 +45,10 @@ function checkLogin(role, redirect = "index.html") {
   } else {
     currentUser = data.user;
     currentRole = data.role;
-    if (role === "admin") document.getElementById("adminName").innerText = currentUser;
-    if (role === "admin") renderEmployeeList(); // render employee list on load
+    if (role === "admin") {
+      document.getElementById("adminName").innerText = currentUser;
+      renderEmployeeList();
+    }
   }
 }
 
@@ -55,43 +64,53 @@ function addEmployee() {
     alert("Please fill all fields");
     return;
   }
-  employees.push({ username: u, password: p });
-  localStorage.setItem("employees", JSON.stringify(employees));
-  document.getElementById("empMsg").innerText = `✅ Employee '${u}' added.`;
-  document.getElementById("empUsername").value = "";
-  document.getElementById("empPassword").value = "";
-  renderEmployeeList();
+
+  fetch(`${scriptURL}?action=addEmployee`, {
+    method: "POST",
+    body: JSON.stringify({ name: u, password: p })
+  })
+  .then(res => res.json())
+  .then(data => {
+    if (data.success) {
+      document.getElementById("empMsg").innerText = `✅ Employee '${u}' added.`;
+      document.getElementById("empUsername").value = "";
+      document.getElementById("empPassword").value = "";
+      renderEmployeeList();
+    } else {
+      alert("❌ Failed to add employee");
+    }
+  });
 }
 
 function renderEmployeeList() {
-  const tbody = document.getElementById("employeeList");
-  tbody.innerHTML = "";
-  employees.forEach((emp, index) => {
-    const row = document.createElement("tr");
+  fetch(`${scriptURL}?action=getEmployees`)
+    .then(res => res.json())
+    .then(data => {
+      const tbody = document.getElementById("employeeList");
+      tbody.innerHTML = "";
+      data.forEach((emp, index) => {
+        const row = document.createElement("tr");
 
-    const tdUser = document.createElement("td");
-    tdUser.textContent = emp.username;
+        const tdUser = document.createElement("td");
+        tdUser.textContent = emp[0];
 
-    const tdPass = document.createElement("td");
-    tdPass.textContent = emp.password;
+        const tdPass = document.createElement("td");
+        tdPass.textContent = emp[1];
 
-    const tdAction = document.createElement("td");
-    const btn = document.createElement("button");
-    btn.textContent = "❌";
-    btn.onclick = () => {
-      if (confirm(`Delete ${emp.username}?`)) {
-        employees.splice(index, 1);
-        localStorage.setItem("employees", JSON.stringify(employees));
-        renderEmployeeList();
-      }
-    };
-    tdAction.appendChild(btn);
+        const tdAction = document.createElement("td");
+        const btn = document.createElement("button");
+        btn.textContent = "❌";
+        btn.onclick = () => {
+          alert("🛑 Deleting from Google Sheets requires additional scripting.");
+        };
+        tdAction.appendChild(btn);
 
-    row.appendChild(tdUser);
-    row.appendChild(tdPass);
-    row.appendChild(tdAction);
-    tbody.appendChild(row);
-  });
+        row.appendChild(tdUser);
+        row.appendChild(tdPass);
+        row.appendChild(tdAction);
+        tbody.appendChild(row);
+      });
+    });
 }
 
 function showSection(id) {

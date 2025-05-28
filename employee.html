@@ -183,54 +183,12 @@
         <div id="leaveMessage" class="message"></div>
       </div>
 
-      <!-- Employee List Section
-      <div id="employee" class="section">
-        <h2>Add New Employee</h2>
-        <form id="employeeForm" onsubmit="addEmployee(event)">
-          <label>Employee ID</label>
-          <input type="text" name="empId" required>
-          <label>Name</label>
-          <input type="text" name="empName" required>
-          <label>Designation</label>
-          <input type="text" name="empDesig" required>
-          <button type="submit">Add Employee</button>
-        </form>
-        <h3>Added Employees</h3>
-        <table id="employeeTable">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Name</th>
-              <th>Designation</th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
-      </div> -->
-
-      <!-- Payslip Generator Section
-      <div id="payslip" class="section">
-        <h2>Payslip Generator</h2>
-        <form id="payslipForm">
-          <label>Employee Name</label>
-          <input type="text" name="empName" required>
-          <label>Month</label>
-          <input type="text" name="month" required placeholder="e.g., May 2025">
-          <label>Basic Salary</label>
-          <input type="number" name="basic" required>
-          <label>Allowance</label>
-          <input type="number" name="allowance" required>
-          <label>Deduction</label>
-          <input type="number" name="deduction" required>
-          <button type="submit">Generate Payslip</button>
-        </form>
-        <div id="payslipOutput" class="message"></div>
-      </div> -->
+     
 
       <!-- About Section -->
       <div id="about" class="section">
         <h2>About</h2>
-        <p>VCube is a technology outsourcing firm specialized in hiring remote contractual teams in order to facilitate large projects. Our work ranges from 3D Modeling, Data Annotation, Photo Capture, Graphics Design, Logo Design, Social Media Marketing, Software Development, HR Consultancy and many more..</p>
+        <p>VCube is a technology outsourcing firm specialized in hiring remote contractual teams in order to facilitate large projects. Our work ranges from 3D Modeling, Data Annotation, Photo Capture, Graphics Design, Logo Design, Social Media Marketing, Software Development, HR Consultancy and many more</p>
       </div>
     </div>
   </div>
@@ -285,7 +243,7 @@
     document.getElementById("leaveForm").addEventListener("submit", function (e) {
       e.preventDefault();
       const data = new FormData(this);
-      fetch("https://script.google.com/macros/s/AKfycby-YLDdRxdvk103uW60OLW0wTr_e_8iwlMp7xdQIC1Y2D3q8o745ESslPQPUv0EhrhG/exec", {
+      fetch("https://script.google.com/macros/s/AKfycby5AIBggsHM2zqNENOJ2jawP5t5DL_RghdvlUdU5RnPq2dYqwwbOKHQYGd1nV2yh86ilA/exec", {
         method: "POST",
         body: data
       }).then(() => {
