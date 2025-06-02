@@ -1,44 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Admin Panel</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css">
 </head>
-<body onload="checkLogin('admin')">
-  <header class="admin-header">
-    <h2>Welcome, Admin: <span id="adminName"></span></h2>
-    <nav>
-      <button onclick="showSection('addEmployee')">Add Employee</button>
-      <!-- <button onclick="showSection('employeeListSection')">Employee List</button> -->
+<body>
+  <header class="navbar">
+    <h2>Admin Panel</h2>
+    <div class="profile">
+      <span id="adminProfileName">Admin</span>
       <button onclick="logout()">Logout</button>
-    </nav>
-  </header> 
+    </div>
+  </header>
 
-  <main>
-    <section id="addEmployee" class="admin-section section">
-      <h3>Add New Employee</h3>
-      <input type="text" id="empUsername" placeholder="Username" />
-      <input type="password" id="empPassword" placeholder="Password" />
-      <button onclick="addEmployee()">Add</button>
-      <p id="empMsg"></p>
-    </section>
-
-    <section id="employeeListSection" class="admin-section section hidden">
-      <h3>Employee List</h3>
-      <table id="employeeTable">
-        <thead>
-          <tr>
-            <th>Username</th>
-            <th>Password</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody id="employeeList">
-          <!-- Rows will be inserted by JS -->
-        </tbody>
-      </table>
-    </section>
+  <main class="form-container">
+    <h3>Add Employee</h3>
+    <form id="addEmployeeForm">
+      <label>Username</label>
+      <input type="text" name="username" required>
+      <label>Password</label>
+      <input type="password" name="password" required>
+      <label>Employee ID</label>
+      <input type="text" name="empId" required>
+      <button type="submit">Add Employee</button>
+    </form>
+    <div id="addMessage" class="message"></div>
   </main>
 
   <script src="script.js"></script>
