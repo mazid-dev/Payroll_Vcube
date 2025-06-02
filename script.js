@@ -13,6 +13,17 @@ if (loginForm) {
     const username = document.getElementById("username").value.trim();
     const password = document.getElementById("password").value.trim();
     const empId = document.getElementById("empId").value.trim();
+    
+
+    const rememberMe = document.getElementById("rememberMe").checked;
+
+    if (rememberMe) {
+      localStorage.setItem("rememberedUser", JSON.stringify({ username, password, empId }));
+    } else {
+      localStorage.removeItem("rememberedUser");
+    }
+    
+
 
     // Check for admin login
     const isAdmin = admins.some(admin =>
